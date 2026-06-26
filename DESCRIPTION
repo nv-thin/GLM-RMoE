@@ -1,0 +1,85 @@
+Package: GLM.RMoE
+Type: Package
+Title: Generalized Linear Models - Regularized Mixtures of Experts
+Version: 2.0
+Authors@R: c(person("Van-Thin", "Nguyen", role = c("aut", "cre"), 
+    email = "nvthin@hcmus.edu.vn"),
+    person("Faicel", "Chamroukhi", role = c("aut"),
+    comment = c(ORCID = "0000-0002-5894-3103"),
+    email = "faicel.chamroukhi@unicaen.fr"),
+    person("Van-Ha", "Hoang", role = c("aut"),
+    email = "hvha@hcmus.edu.vn"),
+    person("Bao-Tuyen", "Huynh", role = c("aut"), 
+    email = "baotuyen.dlu@gmail.com"))
+Description: Generalized Linear Models - Regularized Mixtures of Experts.
+    The main reference is the following one:
+    Nguyen, V. T. (2026) <arXiv:xxxx.xxxxx>.
+URL: https://github.com/nv-thin/GLM-RMoE
+BugReports: https://github.com/nv-thin/GLM-RMoE/issues
+License: GPL (>= 3)
+Depends: 
+    R (>= 2.10)
+Imports: 
+    methods,
+    stats,
+    graphics,
+    MASS,
+    base,
+    plot3D,
+    doParallel,
+    foreach
+Suggests: 
+    knitr,
+    rmarkdown
+Collate:
+    GLM.RMoE-package.R
+    Pik.R
+    GEstep.R
+    Obj.R
+    SoTh.R
+    CoorLQk.R
+    GPMstep.R
+    GSMstep.R
+    GLOG.R
+    GBIC.R
+    GWrite.R
+    Fs.R
+    CoorGateP1.R
+    CoorGateP.R
+    GRMoE-class.R
+    GaussRMoE.R
+    LPi.R
+    LEstep.R
+    LFk.R
+    LCoorExpP1.R
+    LCoorExpP.R
+    LPMstep.R
+    LLOG.R
+    LBIC.R
+    LWrite.R
+    LRMoE-class.R
+    LogisticRMoE.R
+    LogisticRMoE_L2.R
+    PInitial.R
+    PEstep.R
+    PQk.R
+    PCoorExpP.R
+    PPMstep.R
+    PLOG.R
+    PBIC.R
+    PWrite.R
+    PRMoE-class.R
+    PoissonRMoE.R
+    data-cleveland.R
+    data-gaussian.R
+    data-housing.R
+    data-ionosphere.R
+    data-logistic.R
+    data-musk1.R
+    data-poisson.R
+    data-residential.R
+VignetteBuilder: knitr
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+Config/roxygen2/version: 8.0.0
