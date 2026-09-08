@@ -10,8 +10,7 @@
 R Toolbox to run the algorithms and to produce the results presented in
 the submitted paper:
 
-*Estimation and Feature Selection in Mixtures of Generalized Linear
-Experts Models.* Ref: arXiv:xxxx.xxxxx, July, 2026 by Thin Nguyen, Faicel Chamroukhi, Ha Hoang and Tuyen Huynh. Please cite the paper and the toolbox when using the
+*Regularized Estimation and Feature Selection in Mixtures of Generalized Linear Experts.* Ref: arXiv:xxxx.xxxxx, September, 2026 by Thin Nguyen, Faicel Chamroukhi, Ha Hoang and Tuyen Huynh. Please cite the paper and the toolbox when using the
 code.
 
 This package has three main functions:
@@ -23,11 +22,11 @@ This package has three main functions:
 # Installation
 
 You can install **GLM.RMoE** package from
-[GitHub](https://github.com/nv-thin/GLM.RMoE) with:
+[GitHub](https://github.com/nv-thin/GLM-RMoE) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("nv-thin/GLM.RMoE")
+devtools::install_github("nv-thin/GLM-RMoE")
 ```
 
 To build *vignettes* for examples of usage, type the command below
@@ -35,7 +34,7 @@ instead:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("nv-thin/GLM.RMoE", 
+devtools::install_github("nv-thin/GLM-RMoE", 
                          build_opts = c("--no-resave-data", "--no-manual"), 
                          build_vignettes = TRUE)
 ```
