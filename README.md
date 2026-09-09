@@ -1,23 +1,29 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# **GLM.RMoE**: LASSO Regularized Mixture of Experts Models
+# **GLM.RMoE**: LASSO Regularized Mixture-of-Experts Models
 
 <!-- badges: start -->
 
 <!-- badges: end -->
 
-R Toolbox to run the algorithms and to produce the results presented in
-the submitted paper:
+`GLM.RMoE` is an R package for fitting regularized mixture-of-experts models with generalized linear experts. 
+
+The package provides regularized Gaussian, multinomial, and Poisson mixture-of-experts models with LASSO-based feature
+selection.
+
+The package accompanies the paper:
 
 *Regularized Estimation and Feature Selection in Mixtures of Generalized Linear Experts.* Ref: arXiv:xxxx.xxxxx, September, 2026 by Thin Nguyen, Faicel Chamroukhi, Ha Hoang and Tuyen Huynh. Please cite the paper and the toolbox when using the
 code.
 
 This package has three main functions:
 
-  - *GaussRMoE*: To fit Gaussian Regularized Mixture-of-Experts;
-  - *LogisticRMoE*: To fit Logistic Regularized Mixture-of-Experts;
-  - *PoissonRMoE*: To fit Poisson Regularized Mixture-of-Experts.
+| Function         | Model         |
+| ---------------- | ------------- |
+| `GaussRMoE()`    | Gaussian RMoE |
+| `LogisticRMoE()` | Multinomial RMoE |
+| `PoissonRMoE()`  | Poisson RMoE  |
 
 # Installation
 
