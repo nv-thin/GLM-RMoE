@@ -27,22 +27,21 @@ This package has three main functions:
 
 # Installation
 
-You can install **GLM.RMoE** package from
-[GitHub](https://github.com/nv-thin/GLM-RMoE) with:
+Install package:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("nv-thin/GLM-RMoE")
 ```
 
-To build *vignettes* for examples of usage, type the command below
-instead:
+Install with vignettes:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("nv-thin/GLM-RMoE", 
-                         build_opts = c("--no-resave-data", "--no-manual"), 
-                         build_vignettes = TRUE)
+devtools::install_github(
+  "nv-thin/GLM-RMoE",
+  build_vignettes = TRUE,
+  build_opts = c("--no-resave-data", "--no-manual")
+)
 ```
 
 Use the following command to display vignettes:
@@ -50,6 +49,15 @@ Use the following command to display vignettes:
 ``` r
 browseVignettes("GLM.RMoE")
 ```
+
+# Main features
+
+- Gaussian regularized mixture-of-experts
+- Multinomial regularized mixture-of-experts
+- Poisson regularized mixture-of-experts
+- LASSO-based feature selection
+- Proximal Newton optimization
+- Proximal Newton-type optimization
 
 # Usage
 
