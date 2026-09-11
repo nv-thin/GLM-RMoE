@@ -69,36 +69,27 @@ library(GLM.RMoE)
 
 <summary>Gaussian Regularized Mixture-of-Experts</summary>
 
-``` r
-# Application to a simulated data set
+The following example fits a Gaussian RMoE model to a simulated dataset with two experts.
 
+``` r
 data("gaussian")
+
 X <- as.matrix(gaussian[, -8])
 y <- gaussian$V8
 
-K <- 2 # Number of experts
-Lambda <- 5
-Gamma <- 5
-opt <- FALSE # opt = FALSE: proximal Newton; opt = TRUE: proximal Newton-type
-
-grmoe <- GaussRMoE(Xm = X, Ym = y, K = K, Lambda = Lambda, 
-                   Gamma = Gamma, option = opt, verbose = TRUE)
-#> EM - GRMoE: Iteration: 1 | log-likelihood: -1117.02
-#> EM - GRMoE: Iteration: 2 | log-likelihood: -619.861410143135
-#> EM - GRMoE: Iteration: 3 | log-likelihood: -598.424977891145
-#> EM - GRMoE: Iteration: 4 | log-likelihood: -586.957818929492
-#> EM - GRMoE: Iteration: 5 | log-likelihood: -571.440033979336
-#> EM - GRMoE: Iteration: 6 | log-likelihood: -557.710221927643
-#> EM - GRMoE: Iteration: 7 | log-likelihood: -550.013138559108
-#> EM - GRMoE: Iteration: 8 | log-likelihood: -547.366243372975
-#> EM - GRMoE: Iteration: 9 | log-likelihood: -546.674160272791
-#> EM - GRMoE: Iteration: 10 | log-likelihood: -546.499905531508
-#> EM - GRMoE: Iteration: 11 | log-likelihood: -546.452368849434
-#> EM - GRMoE: Iteration: 12 | log-likelihood: -546.437963318026
-#> EM - GRMoE: Iteration: 13 | log-likelihood: -546.433091264981
+grmoe <- GaussRMoE(
+  Xm = X,
+  Ym = y,
+  K = 2,
+  Lambda = 5,
+  Gamma = 5,
+  option = FALSE
+)
 
 grmoe$plot()
 ```
+
+The fitted model can be visualized using `plot()`.
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-6-2.png" style="display: block; margin: auto;" />
 
@@ -106,70 +97,18 @@ grmoe$plot()
 # Application to a real data set
 
 data("housing")
+
 X <- as.matrix(housing[, -15])
 y <- housing$V15
 
-K <- 2 # Number of experts
-Lambda <- 42
-Gamma <- 10
-opt <- FALSE # opt = FALSE: proximal Newton; opt = TRUE: proximal Newton-type
-
-grmoe <- GaussRMoE(Xm = X, Ym = y, K = K, Lambda = Lambda, 
-                   Gamma = Gamma, option = opt, verbose = TRUE)
-#> EM - GRMoE: Iteration: 1 | log-likelihood: -5318.92
-#> EM - GRMoE: Iteration: 2 | log-likelihood: -749.217719726628
-#> EM - GRMoE: Iteration: 3 | log-likelihood: -492.035360486426
-#> EM - GRMoE: Iteration: 4 | log-likelihood: -446.370208731919
-#> EM - GRMoE: Iteration: 5 | log-likelihood: -435.625923454457
-#> EM - GRMoE: Iteration: 6 | log-likelihood: -430.57998444443
-#> EM - GRMoE: Iteration: 7 | log-likelihood: -426.857364593801
-#> EM - GRMoE: Iteration: 8 | log-likelihood: -423.151927211015
-#> EM - GRMoE: Iteration: 9 | log-likelihood: -419.027730728067
-#> EM - GRMoE: Iteration: 10 | log-likelihood: -413.854066373251
-#> EM - GRMoE: Iteration: 11 | log-likelihood: -409.345427450602
-#> EM - GRMoE: Iteration: 12 | log-likelihood: -405.678040971862
-#> EM - GRMoE: Iteration: 13 | log-likelihood: -402.43258352187
-#> EM - GRMoE: Iteration: 14 | log-likelihood: -399.338921506234
-#> EM - GRMoE: Iteration: 15 | log-likelihood: -396.379723577069
-#> EM - GRMoE: Iteration: 16 | log-likelihood: -393.624206419239
-#> EM - GRMoE: Iteration: 17 | log-likelihood: -391.180387033187
-#> EM - GRMoE: Iteration: 18 | log-likelihood: -389.111802437645
-#> EM - GRMoE: Iteration: 19 | log-likelihood: -387.535754483338
-#> EM - GRMoE: Iteration: 20 | log-likelihood: -386.405945490617
-#> EM - GRMoE: Iteration: 21 | log-likelihood: -385.606579601175
-#> EM - GRMoE: Iteration: 22 | log-likelihood: -385.019124748163
-#> EM - GRMoE: Iteration: 23 | log-likelihood: -384.598477503821
-#> EM - GRMoE: Iteration: 24 | log-likelihood: -384.258853477392
-#> EM - GRMoE: Iteration: 25 | log-likelihood: -383.672832174018
-#> EM - GRMoE: Iteration: 26 | log-likelihood: -379.523861049129
-#> EM - GRMoE: Iteration: 27 | log-likelihood: -375.210712564445
-#> EM - GRMoE: Iteration: 28 | log-likelihood: -374.362003706708
-#> EM - GRMoE: Iteration: 29 | log-likelihood: -373.905484000266
-#> EM - GRMoE: Iteration: 30 | log-likelihood: -373.5878891405
-#> EM - GRMoE: Iteration: 31 | log-likelihood: -373.337536571124
-#> EM - GRMoE: Iteration: 32 | log-likelihood: -373.126784375524
-#> EM - GRMoE: Iteration: 33 | log-likelihood: -372.942518847827
-#> EM - GRMoE: Iteration: 34 | log-likelihood: -372.777551734593
-#> EM - GRMoE: Iteration: 35 | log-likelihood: -372.627765951385
-#> EM - GRMoE: Iteration: 36 | log-likelihood: -372.490500063181
-#> EM - GRMoE: Iteration: 37 | log-likelihood: -372.364252106794
-#> EM - GRMoE: Iteration: 38 | log-likelihood: -372.248031273283
-#> EM - GRMoE: Iteration: 39 | log-likelihood: -372.141215708944
-#> EM - GRMoE: Iteration: 40 | log-likelihood: -372.043444839423
-#> EM - GRMoE: Iteration: 41 | log-likelihood: -371.954542322469
-#> EM - GRMoE: Iteration: 42 | log-likelihood: -371.886520879306
-#> EM - GRMoE: Iteration: 43 | log-likelihood: -371.841195648488
-#> EM - GRMoE: Iteration: 44 | log-likelihood: -371.807139345355
-#> EM - GRMoE: Iteration: 45 | log-likelihood: -371.780594545755
-#> EM - GRMoE: Iteration: 46 | log-likelihood: -371.759625826461
-#> EM - GRMoE: Iteration: 47 | log-likelihood: -371.742952111909
-#> EM - GRMoE: Iteration: 48 | log-likelihood: -371.729653121673
-#> EM - GRMoE: Iteration: 49 | log-likelihood: -371.719057538292
-#> EM - GRMoE: Iteration: 50 | log-likelihood: -371.710583972124
-#> EM - GRMoE: Iteration: 51 | log-likelihood: -371.703815084085
-#> EM - GRMoE: Iteration: 52 | log-likelihood: -371.698386848288
-#> EM - GRMoE: Iteration: 53 | log-likelihood: -371.694047195118
-#> EM - GRMoE: Iteration: 54 | log-likelihood: -371.69056033896
+grmoe <- GaussRMoE(
+  Xm = X,
+  Ym = y,
+  K = 2,
+  Lambda = 42,
+  Gamma = 10,
+  option = FALSE
+)
 
 grmoe$plot()
 ```
