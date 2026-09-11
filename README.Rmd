@@ -77,38 +77,44 @@ library(GLM.RMoE)
 <details>
   <summary>Gaussian Regularized Mixture-of-Experts</summary>
 
-```{r, echo=TRUE}
-# Application to a simulated data set
+The following example fits a Gaussian RMoE model to a simulated dataset with two experts.
 
+```{r, echo=TRUE}
 data("gaussian")
+
 X <- as.matrix(gaussian[, -8])
 y <- gaussian$V8
 
-K <- 2 # Number of experts
-Lambda <- 5
-Gamma <- 5
-opt <- FALSE # opt = FALSE: proximal Newton; opt = TRUE: proximal Newton-type
-
-grmoe <- GaussRMoE(Xm = X, Ym = y, K = K, Lambda = Lambda, 
-                   Gamma = Gamma, option = opt, verbose = TRUE)
+grmoe <- GaussRMoE(
+  Xm = X,
+  Ym = y,
+  K = 2,
+  Lambda = 5,
+  Gamma = 5,
+  option = FALSE
+)
 
 grmoe$plot()
 ```
+
+The fitted model can be visualized using `plot()`.
 
 ```{r, echo = TRUE}
 # Application to a real data set
 
 data("housing")
+
 X <- as.matrix(housing[, -15])
 y <- housing$V15
 
-K <- 2 # Number of experts
-Lambda <- 42
-Gamma <- 10
-opt <- FALSE # opt = FALSE: proximal Newton; opt = TRUE: proximal Newton-type
-
-grmoe <- GaussRMoE(Xm = X, Ym = y, K = K, Lambda = Lambda, 
-                   Gamma = Gamma, option = opt, verbose = TRUE)
+grmoe <- GaussRMoE(
+  Xm = X,
+  Ym = y,
+  K = 2,
+  Lambda = 42,
+  Gamma = 10,
+  option = FALSE
+)
 
 grmoe$plot()
 ```
