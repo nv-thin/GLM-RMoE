@@ -14,7 +14,7 @@ selection.
 
 The package accompanies the paper:
 
-*Regularized Estimation and Feature Selection in Mixtures of Generalized Linear Experts.* Ref: arXiv:xxxx.xxxxx, September, 2026 by Thin Nguyen, Faicel Chamroukhi, Ha Hoang and Tuyen Huynh. Please cite the paper and the toolbox when using the
+*Regularized Estimation and Feature Selection in Mixtures of Generalized Linear Experts.* Ref: arXiv:1907.06994v2, September, 2026 by Thin Nguyen-Van, Faicel Chamroukhi, Ha Hoang Van and Bao Tuyen Huynh. Please cite the paper and the toolbox when using the
 code.
 
 This package has three main functions:
