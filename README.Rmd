@@ -91,7 +91,7 @@ grmoe <- GaussRMoE(
   K = 2,
   Lambda = 5,
   Gamma = 5,
-  option = FALSE
+  option = FALSE # FALSE: proximal Newton; TRUE: proximal Newton-type
 )
 
 grmoe$plot()
@@ -99,8 +99,9 @@ grmoe$plot()
 
 The fitted model can be visualized using `plot()`.
 
+The following example fits a Gaussian RMoE model to a real dataset with two experts.
+
 ```{r, echo = TRUE}
-# Application to a real data set
 
 data("housing")
 
@@ -113,7 +114,7 @@ grmoe <- GaussRMoE(
   K = 2,
   Lambda = 42,
   Gamma = 10,
-  option = FALSE
+  option = FALSE # FALSE: proximal Newton; TRUE: proximal Newton-type
 )
 
 grmoe$plot()
@@ -122,44 +123,52 @@ grmoe$plot()
 </details>
 
 <details>
-  <summary>Logistic Regularized Mixture-of-Experts</summary>
+  <summary>Multinomial Regularized Mixture-of-Experts</summary>
+
+The following example fits a multinomial RMoE model to a simulated dataset with two experts.
 
 ```{r, echo=TRUE}
-# Application to a simulated data set
 
 data("logistic")
+
 X <- as.matrix(logistic[, -8])
 y <- logistic$V8
 
-K <- 2 # Number of experts
-Lambda <- 3
-Gamma <- 3
-rho = 0.57
-opt <- FALSE # opt = FALSE: proximal Newton; opt = TRUE: proximal Newton-type
-
-lrmoe <- LogisticRMoE_L2(Xmat = X, Ymat = y, K = K, Lambda = Lambda, 
-                   Gamma = Gamma, option = opt, verbose = TRUE)
+lrmoe <- LogisticRMoE(
+  Xmat = X,
+  Ymat = y,
+  K = 2,
+  Lambda = 3,
+  Gamma = 3,
+  option = FALSE # FALSE: proximal Newton; TRUE: proximal Newton-type
+)
 
 lrmoe$plot()
 ```
+The fitted model can be visualized using `plot()`.
+
+The following example fits a multinomial RMoE model to a real dataset with two experts.
 
 ```{r, echo = TRUE}
-# Application to a real data set
 
 data("ionosphere")
+
 X <- as.matrix(ionosphere[, -35])
 y <- ionosphere$V35
 
-K <- 2 # Number of experts
-Lambda <- 3
-Gamma <- 3
-opt <- FALSE # opt = FALSE: proximal Newton; opt = TRUE: proximal Newton-type
-
-lrmoe <- LogisticRMoE(Xmat = X, Ymat = y, K = K, Lambda = Lambda, 
-                   Gamma = Gamma, option = opt, verbose = TRUE)
+lrmoe <- LogisticRMoE(
+  Xmat = X,
+  Ymat = y, 
+  K = 2, 
+  Lambda = 3, 
+  Gamma = 3, 
+  option = FALSE # FALSE: proximal Newton; TRUE: proximal Newton-type
+)
 
 lrmoe$plot()
 ```
+
+The fitted model can be visualized using `plot()`.
 
 </details>
 
