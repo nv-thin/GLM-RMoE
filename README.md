@@ -83,7 +83,7 @@ grmoe <- GaussRMoE(
   K = 2,
   Lambda = 5,
   Gamma = 5,
-  option = FALSE
+  option = FALSE # FALSE: proximal Newton; TRUE: proximal Newton-type
 )
 
 grmoe$plot()
@@ -93,8 +93,9 @@ The fitted model can be visualized using `plot()`.
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-6-2.png" style="display: block; margin: auto;" />
 
+The following example fits a Gaussian RMoE model to a real dataset with two experts.
+
 ``` r
-# Application to a real data set
 
 data("housing")
 
@@ -107,11 +108,13 @@ grmoe <- GaussRMoE(
   K = 2,
   Lambda = 42,
   Gamma = 10,
-  option = FALSE
+  option = FALSE # FALSE: proximal Newton; TRUE: proximal Newton-type
 )
 
 grmoe$plot()
 ```
+
+The fitted model can be visualized using `plot()`.
 
 <img src="man/figures/README-unnamed-chunk-7-1.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-7-2.png" style="display: block; margin: auto;" />
 
@@ -119,274 +122,55 @@ grmoe$plot()
 
 <details>
 
-<summary>Logistic Regularized Mixture-of-Experts</summary>
+<summary>Multinomial Regularized Mixture-of-Experts</summary>
+
+The following example fits a multinomial RMoE model to a simulated dataset with two experts.
 
 ``` r
-# Application to a simulated data set
 
 data("logistic")
+
 X <- as.matrix(logistic[, -8])
 y <- logistic$V8
 
-K <- 2 # Number of experts
-Lambda <- 3
-Gamma <- 3
-opt <- FALSE # opt = FALSE: proximal Newton; opt = TRUE: proximal Newton-type
-
-lrmoe <- LogisticRMoE(Xmat = X, Ymat = y, K = K, Lambda = Lambda, 
-                   Gamma = Gamma, option = opt, verbose = TRUE)
-#> EM - LRMoE: Iteration: 1 | log-likelihood: -364.56
-#> EM - LRMoE: Iteration: 2 | log-likelihood: -214.548431280591
-#> EM - LRMoE: Iteration: 3 | log-likelihood: -205.613994128018
-#> EM - LRMoE: Iteration: 4 | log-likelihood: -201.300976433281
-#> EM - LRMoE: Iteration: 5 | log-likelihood: -198.269555649633
-#> EM - LRMoE: Iteration: 6 | log-likelihood: -195.682661524876
-#> EM - LRMoE: Iteration: 7 | log-likelihood: -193.489917106575
-#> EM - LRMoE: Iteration: 8 | log-likelihood: -191.661856170654
-#> EM - LRMoE: Iteration: 9 | log-likelihood: -190.75961827364
-#> EM - LRMoE: Iteration: 10 | log-likelihood: -190.105451982756
-#> EM - LRMoE: Iteration: 11 | log-likelihood: -189.606662269845
-#> EM - LRMoE: Iteration: 12 | log-likelihood: -189.284968817386
-#> EM - LRMoE: Iteration: 13 | log-likelihood: -189.043873543076
-#> EM - LRMoE: Iteration: 14 | log-likelihood: -188.848179354726
-#> EM - LRMoE: Iteration: 15 | log-likelihood: -188.68161300773
-#> EM - LRMoE: Iteration: 16 | log-likelihood: -188.536124884001
-#> EM - LRMoE: Iteration: 17 | log-likelihood: -188.407323081782
-#> EM - LRMoE: Iteration: 18 | log-likelihood: -188.29253277848
-#> EM - LRMoE: Iteration: 19 | log-likelihood: -188.189941510854
-#> EM - LRMoE: Iteration: 20 | log-likelihood: -188.098234887941
-#> EM - LRMoE: Iteration: 21 | log-likelihood: -188.016376267447
-#> EM - LRMoE: Iteration: 22 | log-likelihood: -187.943535481759
-#> EM - LRMoE: Iteration: 23 | log-likelihood: -187.878953582495
-#> EM - LRMoE: Iteration: 24 | log-likelihood: -187.821924864576
-#> EM - LRMoE: Iteration: 25 | log-likelihood: -187.771771823272
-#> EM - LRMoE: Iteration: 26 | log-likelihood: -187.727835270474
-#> EM - LRMoE: Iteration: 27 | log-likelihood: -187.689416352758
-#> EM - LRMoE: Iteration: 28 | log-likelihood: -187.655383351252
-#> EM - LRMoE: Iteration: 29 | log-likelihood: -187.624883344395
-#> EM - LRMoE: Iteration: 30 | log-likelihood: -187.597426071817
-#> EM - LRMoE: Iteration: 31 | log-likelihood: -187.572658085876
-#> EM - LRMoE: Iteration: 32 | log-likelihood: -187.550293907221
-#> EM - LRMoE: Iteration: 33 | log-likelihood: -187.530086214931
-#> EM - LRMoE: Iteration: 34 | log-likelihood: -187.511812452255
-#> EM - LRMoE: Iteration: 35 | log-likelihood: -187.495268758671
-#> EM - LRMoE: Iteration: 36 | log-likelihood: -187.480267283391
-#> EM - LRMoE: Iteration: 37 | log-likelihood: -187.466635073304
-#> EM - LRMoE: Iteration: 38 | log-likelihood: -187.454213653544
-#> EM - LRMoE: Iteration: 39 | log-likelihood: -187.442858844422
-#> EM - LRMoE: Iteration: 40 | log-likelihood: -187.432440572826
-#> EM - LRMoE: Iteration: 41 | log-likelihood: -187.422842556108
-#> EM - LRMoE: Iteration: 42 | log-likelihood: -187.413961809299
-#> EM - LRMoE: Iteration: 43 | log-likelihood: -187.405707972207
-#> EM - LRMoE: Iteration: 44 | log-likelihood: -187.398003973173
-#> EM - LRMoE: Iteration: 45 | log-likelihood: -187.39078053392
-#> EM - LRMoE: Iteration: 46 | log-likelihood: -187.38397973935
-#> EM - LRMoE: Iteration: 47 | log-likelihood: -187.377552463103
-#> EM - LRMoE: Iteration: 48 | log-likelihood: -187.371457319839
-#> EM - LRMoE: Iteration: 49 | log-likelihood: -187.365659655495
-#> EM - LRMoE: Iteration: 50 | log-likelihood: -187.360130597975
-#> EM - LRMoE: Iteration: 51 | log-likelihood: -187.354846183414
-#> EM - LRMoE: Iteration: 52 | log-likelihood: -187.349786566749
-#> EM - LRMoE: Iteration: 53 | log-likelihood: -187.344935320097
-#> EM - LRMoE: Iteration: 54 | log-likelihood: -187.340278818365
-#> EM - LRMoE: Iteration: 55 | log-likelihood: -187.335805708558
-#> EM - LRMoE: Iteration: 56 | log-likelihood: -187.331506457278
-#> EM - LRMoE: Iteration: 57 | log-likelihood: -187.327375150277
-#> EM - LRMoE: Iteration: 58 | log-likelihood: -187.323402477952
-#> EM - LRMoE: Iteration: 59 | log-likelihood: -187.319582324514
-#> EM - LRMoE: Iteration: 60 | log-likelihood: -187.315909229361
-#> EM - LRMoE: Iteration: 61 | log-likelihood: -187.312378214512
-#> EM - LRMoE: Iteration: 62 | log-likelihood: -187.30898465385
-#> EM - LRMoE: Iteration: 63 | log-likelihood: -187.305724928419
-#> EM - LRMoE: Iteration: 64 | log-likelihood: -187.302593958189
-#> EM - LRMoE: Iteration: 65 | log-likelihood: -187.299587676955
-#> EM - LRMoE: Iteration: 66 | log-likelihood: -187.296702099582
-#> EM - LRMoE: Iteration: 67 | log-likelihood: -187.293933294697
-#> EM - LRMoE: Iteration: 68 | log-likelihood: -187.291277370183
-#> EM - LRMoE: Iteration: 69 | log-likelihood: -187.288730466432
-#> EM - LRMoE: Iteration: 70 | log-likelihood: -187.286288755243
-#> EM - LRMoE: Iteration: 71 | log-likelihood: -187.283948442817
-#> EM - LRMoE: Iteration: 72 | log-likelihood: -187.28170577553
-#> EM - LRMoE: Iteration: 73 | log-likelihood: -187.27955704744
-#> EM - LRMoE: Iteration: 74 | log-likelihood: -187.277498608681
-#> EM - LRMoE: Iteration: 75 | log-likelihood: -187.275526874093
-#> EM - LRMoE: Iteration: 76 | log-likelihood: -187.273638331615
-#> EM - LRMoE: Iteration: 77 | log-likelihood: -187.27182955007
-#> EM - LRMoE: Iteration: 78 | log-likelihood: -187.270097186132
-#> EM - LRMoE: Iteration: 79 | log-likelihood: -187.268437990315
-#> EM - LRMoE: Iteration: 80 | log-likelihood: -187.266848811909
-#> EM - LRMoE: Iteration: 81 | log-likelihood: -187.265327703865
-#> EM - LRMoE: Iteration: 82 | log-likelihood: -187.263870441764
-#> EM - LRMoE: Iteration: 83 | log-likelihood: -187.262474216916
-#> EM - LRMoE: Iteration: 84 | log-likelihood: -187.261136322569
-#> EM - LRMoE: Iteration: 85 | log-likelihood: -187.25985415702
-#> EM - LRMoE: Iteration: 86 | log-likelihood: -187.258625224309
-#> EM - LRMoE: Iteration: 87 | log-likelihood: -187.257447133354
-#> EM - LRMoE: Iteration: 88 | log-likelihood: -187.256317596284
-#> EM - LRMoE: Iteration: 89 | log-likelihood: -187.25523442627
-#> EM - LRMoE: Iteration: 90 | log-likelihood: -187.254195534961
-#> EM - LRMoE: Iteration: 91 | log-likelihood: -187.253198929631
-#> EM - LRMoE: Iteration: 92 | log-likelihood: -187.252242710087
-#> EM - LRMoE: Iteration: 93 | log-likelihood: -187.251325065417
-#> EM - LRMoE: Iteration: 94 | log-likelihood: -187.250444270617
-#> EM - LRMoE: Iteration: 95 | log-likelihood: -187.249598683155
-#> EM - LRMoE: Iteration: 96 | log-likelihood: -187.248787345576
-#> EM - LRMoE: Iteration: 97 | log-likelihood: -187.248008067613
-#> EM - LRMoE: Iteration: 98 | log-likelihood: -187.247259524838
-#> EM - LRMoE: Iteration: 99 | log-likelihood: -187.24654028511
-#> EM - LRMoE: Iteration: 100 | log-likelihood: -187.245849079713
-#> EM - LRMoE: Iteration: 101 | log-likelihood: -187.24518520884
-#> EM - LRMoE: Iteration: 102 | log-likelihood: -187.244546937407
-#> EM - LRMoE: Iteration: 103 | log-likelihood: -187.243933171941
-#> EM - LRMoE: Iteration: 104 | log-likelihood: -187.243342880757
-#> EM - LRMoE: Iteration: 105 | log-likelihood: -187.242775666909
-#> EM - LRMoE: Iteration: 106 | log-likelihood: -187.242229905666
-#> EM - LRMoE: Iteration: 107 | log-likelihood: -187.241704717475
-#> EM - LRMoE: Iteration: 108 | log-likelihood: -187.241199263501
-#> EM - LRMoE: Iteration: 109 | log-likelihood: -187.240712738022
-#> EM - LRMoE: Iteration: 110 | log-likelihood: -187.240244370207
-#> EM - LRMoE: Iteration: 111 | log-likelihood: -187.239793423927
-#> EM - LRMoE: Iteration: 112 | log-likelihood: -187.239359196421
-#> EM - LRMoE: Iteration: 113 | log-likelihood: -187.238941016662
-#> EM - LRMoE: Iteration: 114 | log-likelihood: -187.238538243736
-#> EM - LRMoE: Iteration: 115 | log-likelihood: -187.238150265298
-#> EM - LRMoE: Iteration: 116 | log-likelihood: -187.237776496126
-#> EM - LRMoE: Iteration: 117 | log-likelihood: -187.237416376756
-#> EM - LRMoE: Iteration: 118 | log-likelihood: -187.237072294327
-#> EM - LRMoE: Iteration: 119 | log-likelihood: -187.236740610826
-#> EM - LRMoE: Iteration: 120 | log-likelihood: -187.236420846642
-#> EM - LRMoE: Iteration: 121 | log-likelihood: -187.236112543945
-#> EM - LRMoE: Iteration: 122 | log-likelihood: -187.235815752528
-#> EM - LRMoE: Iteration: 123 | log-likelihood: -187.235528912144
-#> EM - LRMoE: Iteration: 124 | log-likelihood: -187.235252861967
-#> EM - LRMoE: Iteration: 125 | log-likelihood: -187.234986538489
-#> EM - LRMoE: Iteration: 126 | log-likelihood: -187.234729064756
-#> EM - LRMoE: Iteration: 127 | log-likelihood: -187.23448126433
-#> EM - LRMoE: Iteration: 128 | log-likelihood: -187.234242135919
-#> EM - LRMoE: Iteration: 129 | log-likelihood: -187.234011760876
-#> EM - LRMoE: Iteration: 130 | log-likelihood: -187.233790457354
-#> EM - LRMoE: Iteration: 131 | log-likelihood: -187.23357724528
-#> EM - LRMoE: Iteration: 132 | log-likelihood: -187.233371374065
-#> EM - LRMoE: Iteration: 133 | log-likelihood: -187.233172620032
-#> EM - LRMoE: Iteration: 134 | log-likelihood: -187.232980725167
-#> EM - LRMoE: Iteration: 135 | log-likelihood: -187.232795440764
-#> EM - LRMoE: Iteration: 136 | log-likelihood: -187.232616873084
-#> EM - LRMoE: Iteration: 137 | log-likelihood: -187.232444428345
-#> EM - LRMoE: Iteration: 138 | log-likelihood: -187.232277935511
-#> EM - LRMoE: Iteration: 139 | log-likelihood: -187.232117136534
-#> EM - LRMoE: Iteration: 140 | log-likelihood: -187.231961830441
-#> EM - LRMoE: Iteration: 141 | log-likelihood: -187.231811823688
-#> EM - LRMoE: Iteration: 142 | log-likelihood: -187.231666929895
-#> EM - LRMoE: Iteration: 143 | log-likelihood: -187.231526969565
-#> EM - LRMoE: Iteration: 144 | log-likelihood: -187.231391769807
-#> EM - LRMoE: Iteration: 145 | log-likelihood: -187.231261164086
-#> EM - LRMoE: Iteration: 146 | log-likelihood: -187.231134991974
-#> EM - LRMoE: Iteration: 147 | log-likelihood: -187.231013098909
-#> EM - LRMoE: Iteration: 148 | log-likelihood: -187.230895335966
-#> EM - LRMoE: Iteration: 149 | log-likelihood: -187.230781559642
-#> EM - LRMoE: Iteration: 150 | log-likelihood: -187.230671631636
-#> EM - LRMoE: Iteration: 151 | log-likelihood: -187.230565418656
-#> EM - LRMoE: Iteration: 152 | log-likelihood: -187.230462792223
-#> EM - LRMoE: Iteration: 153 | log-likelihood: -187.230363628479
+lrmoe <- LogisticRMoE(
+  Xmat = X,
+  Ymat = y,
+  K = 2,
+  Lambda = 3,
+  Gamma = 3,
+  option = FALSE # FALSE: proximal Newton; TRUE: proximal Newton-type
+)
 
 lrmoe$plot()
 ```
+
+The fitted model can be visualized using `plot()`.
 
 <img src="man/figures/README-unnamed-chunk-8-1.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-8-2.png" style="display: block; margin: auto;" />
 
+The following example fits a multinomial RMoE model to a real dataset with two experts.
+
 ``` r
-# Application to a real data set
 
 data("ionosphere")
+
 X <- as.matrix(ionosphere[, -35])
 y <- ionosphere$V35
 
-K <- 2 # Number of experts
-Lambda <- 3
-Gamma <- 3
-opt <- FALSE # opt = FALSE: proximal Newton; opt = TRUE: proximal Newton-type
-
-lrmoe <- LogisticRMoE(Xmat = X, Ymat = y, K = K, Lambda = Lambda, 
-                   Gamma = Gamma, option = opt, verbose = TRUE)
-#> EM - LRMoE: Iteration: 1 | log-likelihood: -1203.14
-#> EM - LRMoE: Iteration: 2 | log-likelihood: -147.336123141598
-#> EM - LRMoE: Iteration: 3 | log-likelihood: -135.117029257537
-#> EM - LRMoE: Iteration: 4 | log-likelihood: -131.838744091201
-#> EM - LRMoE: Iteration: 5 | log-likelihood: -130.131881151203
-#> EM - LRMoE: Iteration: 6 | log-likelihood: -128.820244603484
-#> EM - LRMoE: Iteration: 7 | log-likelihood: -127.617046458686
-#> EM - LRMoE: Iteration: 8 | log-likelihood: -126.653519933562
-#> EM - LRMoE: Iteration: 9 | log-likelihood: -125.972370541473
-#> EM - LRMoE: Iteration: 10 | log-likelihood: -125.302704915212
-#> EM - LRMoE: Iteration: 11 | log-likelihood: -124.64988977302
-#> EM - LRMoE: Iteration: 12 | log-likelihood: -124.023858084791
-#> EM - LRMoE: Iteration: 13 | log-likelihood: -123.39731064493
-#> EM - LRMoE: Iteration: 14 | log-likelihood: -122.862625106115
-#> EM - LRMoE: Iteration: 15 | log-likelihood: -122.469073809498
-#> EM - LRMoE: Iteration: 16 | log-likelihood: -122.180624648817
-#> EM - LRMoE: Iteration: 17 | log-likelihood: -121.945489972702
-#> EM - LRMoE: Iteration: 18 | log-likelihood: -121.751135232486
-#> EM - LRMoE: Iteration: 19 | log-likelihood: -121.591518017415
-#> EM - LRMoE: Iteration: 20 | log-likelihood: -121.428953206052
-#> EM - LRMoE: Iteration: 21 | log-likelihood: -121.252896308748
-#> EM - LRMoE: Iteration: 22 | log-likelihood: -121.057757659616
-#> EM - LRMoE: Iteration: 23 | log-likelihood: -120.835448842977
-#> EM - LRMoE: Iteration: 24 | log-likelihood: -120.587643649686
-#> EM - LRMoE: Iteration: 25 | log-likelihood: -120.307541578504
-#> EM - LRMoE: Iteration: 26 | log-likelihood: -119.999611419958
-#> EM - LRMoE: Iteration: 27 | log-likelihood: -119.665178476485
-#> EM - LRMoE: Iteration: 28 | log-likelihood: -119.288742595752
-#> EM - LRMoE: Iteration: 29 | log-likelihood: -118.865401968948
-#> EM - LRMoE: Iteration: 30 | log-likelihood: -118.395891411075
-#> EM - LRMoE: Iteration: 31 | log-likelihood: -117.893980509154
-#> EM - LRMoE: Iteration: 32 | log-likelihood: -117.377132077834
-#> EM - LRMoE: Iteration: 33 | log-likelihood: -116.842244734263
-#> EM - LRMoE: Iteration: 34 | log-likelihood: -116.271601335921
-#> EM - LRMoE: Iteration: 35 | log-likelihood: -115.753115076243
-#> EM - LRMoE: Iteration: 36 | log-likelihood: -115.510506424851
-#> EM - LRMoE: Iteration: 37 | log-likelihood: -115.301818652966
-#> EM - LRMoE: Iteration: 38 | log-likelihood: -115.10119506534
-#> EM - LRMoE: Iteration: 39 | log-likelihood: -114.933101531715
-#> EM - LRMoE: Iteration: 40 | log-likelihood: -114.768310843875
-#> EM - LRMoE: Iteration: 41 | log-likelihood: -114.59934481366
-#> EM - LRMoE: Iteration: 42 | log-likelihood: -114.422719306308
-#> EM - LRMoE: Iteration: 43 | log-likelihood: -114.236768127433
-#> EM - LRMoE: Iteration: 44 | log-likelihood: -114.038953821039
-#> EM - LRMoE: Iteration: 45 | log-likelihood: -113.825916387366
-#> EM - LRMoE: Iteration: 46 | log-likelihood: -113.593666335974
-#> EM - LRMoE: Iteration: 47 | log-likelihood: -113.33712317645
-#> EM - LRMoE: Iteration: 48 | log-likelihood: -113.049439215194
-#> EM - LRMoE: Iteration: 49 | log-likelihood: -112.72347744252
-#> EM - LRMoE: Iteration: 50 | log-likelihood: -112.357611098484
-#> EM - LRMoE: Iteration: 51 | log-likelihood: -111.947278281778
-#> EM - LRMoE: Iteration: 52 | log-likelihood: -111.486076205701
-#> EM - LRMoE: Iteration: 53 | log-likelihood: -110.964587398095
-#> EM - LRMoE: Iteration: 54 | log-likelihood: -110.362436367945
-#> EM - LRMoE: Iteration: 55 | log-likelihood: -109.660982079137
-#> EM - LRMoE: Iteration: 56 | log-likelihood: -108.737013286811
-#> EM - LRMoE: Iteration: 57 | log-likelihood: -106.919253861248
-#> EM - LRMoE: Iteration: 58 | log-likelihood: -105.567180950434
-#> EM - LRMoE: Iteration: 59 | log-likelihood: -105.089570452065
-#> EM - LRMoE: Iteration: 60 | log-likelihood: -104.924397289325
-#> EM - LRMoE: Iteration: 61 | log-likelihood: -104.864155286109
-#> EM - LRMoE: Iteration: 62 | log-likelihood: -104.836928514832
-#> EM - LRMoE: Iteration: 63 | log-likelihood: -104.820892947122
-#> EM - LRMoE: Iteration: 64 | log-likelihood: -104.809942266525
-#> EM - LRMoE: Iteration: 65 | log-likelihood: -104.801447846486
-#> EM - LRMoE: Iteration: 66 | log-likelihood: -104.794519053348
-#> EM - LRMoE: Iteration: 67 | log-likelihood: -104.788753699521
-#> EM - LRMoE: Iteration: 68 | log-likelihood: -104.783912770012
-#> EM - LRMoE: Iteration: 69 | log-likelihood: -104.77984468456
-#> EM - LRMoE: Iteration: 70 | log-likelihood: -104.77642594817
-#> EM - LRMoE: Iteration: 71 | log-likelihood: -104.773558822548
-#> EM - LRMoE: Iteration: 72 | log-likelihood: -104.77173797918
-#> EM - LRMoE: Iteration: 73 | log-likelihood: -104.771137815457
-#> EM - LRMoE: Iteration: 74 | log-likelihood: -104.770845282748
-#> EM - LRMoE: Iteration: 75 | log-likelihood: -104.770698389817
-#> EM - LRMoE: Iteration: 76 | log-likelihood: -104.770623356058
+lrmoe <- LogisticRMoE(
+  Xmat = X,
+  Ymat = y, 
+  K = 2, 
+  Lambda = 3, 
+  Gamma = 3, 
+  option = FALSE # FALSE: proximal Newton; TRUE: proximal Newton-type
+)
 
 lrmoe$plot()
 ```
+
+The fitted model can be visualized using `plot()`.
 
 <img src="man/figures/README-unnamed-chunk-9-1.png" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-9-2.png" style="display: block; margin: auto;" />
 
