@@ -60,7 +60,7 @@ betak <- matrix(rep(0, d*K), ncol = K)
 zerocoeff <- matrix(ncol = 2, dimnames = list(NULL, c("wk", "betak")))
 ###
 
-#Generated Beta
+# Generated Beta
 for (k in 1:K)
 {
   betak[,k] = stats::runif(d,-5,5)
@@ -104,7 +104,7 @@ if (verbose) {
 
 repeat
 {
-  step =step+1
+  step = step + 1
   L1 = L2
   tau = Ge.step(betak, wk, S, Y, X, K)
   # para = pm.step(tau, X, Y, d, K, S, lambda, betak)
@@ -147,7 +147,7 @@ repeat
   }
   ###
 
-  if((L2-L1)/abs(L1) < eps) break
+  if((L2 - L1) / abs(L1) < eps) break
 }
 
 ###
@@ -169,9 +169,9 @@ BIC = GBIC(X, Y, wk, betak, S)
 # print(paste("BIC: ", BIC))
 ###
 
-for(i in 1:step)
+for (i in 1:step)
 {
-  Arr[i]=arr[i]
+  Arr[i] = arr[i]
 }
 
 ###
@@ -184,12 +184,12 @@ for(i in 1:step)
   MAXS <- S
   MAXwk <- wk
   MAXLOG <- L2
-  MAXBIC <-BIC
+  MAXBIC <- BIC
 }
 #===============Plot Zero Coefficient============
 # U = t(ZMat)
 # U = t(U[,c(1:step)])
-# graphics::matplot(U, type = c("o"), pch=19, col=1:K, xlab = 'Step', ylab = 'Number of Zero Coefficients')
+# graphics::matplot(U, type = c("o"), pch = 19, col=1:K, xlab = 'Step', ylab = 'Number of Zero Coefficients')
 #==============Plot Log-likelihood value========
 
 ###
