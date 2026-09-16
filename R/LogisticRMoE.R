@@ -30,7 +30,7 @@ LogisticRMoE = function(Xmat, Ymat, K, Lambda, Gamma, option = FALSE, verbose = 
 # library(base)
 # library(doParallel)
 # library(foreach)
-#setDefaultCluster(makePSOCKcluster(K))
+# setDefaultCluster(makePSOCKcluster(K))
 #=========Parallel==============
 cl = parallel::makeCluster(K)
 doParallel::registerDoParallel(cl)
@@ -42,26 +42,26 @@ n <- dim(X)[1]
 d <- dim(X)[2]
 R <- max(Y)
 #===============================
-lambda <- matrix(rep(Lambda,(R-1)*K), ncol=(R-1))
-gamma = c(rep(Gamma,K-1))
+lambda <- matrix(rep(Lambda, (R - 1) * K), ncol = (R-1))
+gamma = c(rep(Gamma, K - 1))
 rho = 0
-U <- matrix(rep(0,n*R), ncol=R)
+U <- matrix(rep(0, n*R), ncol = R)
 for (i in 1:n) U[i,Y[i]] = 1
-#MAXLOG = -10^6
+# MAXLOG = -10^6
 #===================
 pik = c(rep(0, K))
 Nstep = 1000
 arr = c(rep(0, Nstep))
-# ZMat = matrix(rep(0, Nstep*K), ncol=K)
+# ZMat = matrix(rep(0, Nstep*K), ncol = K)
 eps = 1e-4
-wk = matrix(rep(0,(K-1)*d), ncol = d)
-eta <- array(0, dim = c(K,R-1,d))
+wk = matrix(rep(0, (K - 1) * d), ncol = d)
+eta <- array(0, dim = c(K, R - 1, d))
 
 ###
 zerocoeff <- matrix(ncol = 2, dimnames = list(NULL, c("wk", "eta")))
 ###
 
-#Generated eta
+# Generated eta
 for (k in 1:K)
 {
   for(r in 1:(R-1))
@@ -106,7 +106,7 @@ if (verbose) {
 BEGIN = Sys.time()
 repeat
 {
-  step =step+1
+  step = step + 1
   L1 = L2
   #---------E-step
   tau = Le.step(eta, wk, Y, X, K, R)
@@ -144,7 +144,7 @@ repeat
   }
   ###
 
-  if((L2-L1) < eps) break
+  if((L2 - L1) < eps) break
 }
 
 ###
@@ -167,7 +167,7 @@ Step = seq.int(1, step)
 Arr = c(rep(0, step))
 for(i in 1:step)
 {
-  Arr[i]=arr[i]
+  Arr[i] = arr[i]
 }
 
 ###
