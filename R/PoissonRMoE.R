@@ -42,8 +42,8 @@ d <- dim(X)[2]
 #MAXLOG = -10^6
 #rho = 0.1*log(n)
 #================Penalty parameters for bike (20-2)
-lambda <- c(rep(Lambda,K))
-gamma = c(rep(Gamma,K-1))
+lambda <- c(rep(Lambda, K))
+gamma = c(rep(Gamma, K - 1))
 rho = 0
 #===================
 N = 1
@@ -108,7 +108,7 @@ for(runstep in 1:N)
 
   repeat
   {
-    step =step+1
+    step = step + 1
     L1 = L2
     #----------E-step
     tau = Pe.step(betak, wk, Y, X, K)
@@ -146,7 +146,7 @@ for(runstep in 1:N)
     }
     ###
 
-    if((L2-L1)/abs(L1) < eps) break
+    if((L2 - L1) / abs(L1) < eps) break
   }
 
   ###
@@ -168,7 +168,7 @@ for(runstep in 1:N)
   Arr = c(rep(0, step))
   for(i in 1:step)
   {
-    Arr[i]=arr[i]
+    Arr[i] = arr[i]
   }
 
   ###
